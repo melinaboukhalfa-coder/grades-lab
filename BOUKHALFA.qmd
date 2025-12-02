@@ -20,6 +20,6 @@ here::i_am("grades-lab.Rproj")
 ```
 
 ```{r}
-course_description<-read.csv(here("data","courses.csv"))
+course_description<-vroom(here("data","courses.csv"))
 ```
 
