@@ -224,8 +224,31 @@ There is no clear pattern, they seem a bit dependant from one another but not co
 ## Question 21
 ```{r}
 grades_summary|>group_by(group)|>summarise(correlation=cor(`Pharaonic Law and Governance`,`Alchemy and Hermetic Philosophy`))|>
-  arrange(desc(abs(correlation)))|>
   slice_head(n=10)|>knitr::kable()
 ```
 
 There is a low correlation between the two courses, but they all seem positive. 
+
+## Question 22
+
+```{r}
+top_group <- grades_summary |>
+  group_by(group) |>
+  summarise(cor_val = cor(
+    `Pharaonic Law and Governance`,
+    `Alchemy and Hermetic Philosophy`,
+  ), .groups = "drop") |>
+  slice_max(abs(cor_val)) |>
+  pull(group)
+
+grades_summary |>
+  filter(group == top_group) |>
+  ggplot(aes(
+    x = `Alchemy and Hermetic Philosophy`,
+    y = `Pharaonic Law and Governance`
+  )) +
+  geom_point(alpha=0.5) +
+  theme_minimal()
+```
+
+There is no clear pattern. 
