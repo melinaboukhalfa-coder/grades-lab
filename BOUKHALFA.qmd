@@ -84,3 +84,14 @@ age_students|>group_by(group)|>summarise(median=median(age))|>
   knitr::kable()
 ```
 
+## Question 9 
+
+```{r}
+age_students|> group_by(group)|>
+  slice_max(age)|> 
+  arrange(desc(age))|>
+  summarise(identifier=id, sex=sex,age=age)|>
+  knitr::kable()
+```
+# Simple grade analysis
+## Question 10 
