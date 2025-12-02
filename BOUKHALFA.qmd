@@ -113,3 +113,14 @@ grades |>
   theme_minimal()
 ```
 
+## Question 12
+
+```{r}
+grades |>
+  mutate(grade = as.numeric(grade))|> 
+  filter(!is.na(grade))|>
+  left_join(course_description, by = "course_id") |>
+  ggplot(aes(x = factor(semester), y = grade, fill = factor(semester))) +
+    geom_boxplot()
+```
+
