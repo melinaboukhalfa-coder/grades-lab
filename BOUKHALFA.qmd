@@ -1,0 +1,25 @@
+---
+title: "BOUKHALFA"
+author: "Mélina Boukhalfa"
+format: html
+---
+
+# Study organisation
+## Question 1 
+
+```{r}
+library(here)
+library(vroom)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+```
+
+```{r}
+here::i_am("grades-lab.Rproj")
+```
+
+```{r}
+course_description<-read.csv(here("data","courses.csv"))
+```
+
