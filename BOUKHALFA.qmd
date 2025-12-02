@@ -270,3 +270,21 @@ final_grades |>
 
 ## Question 24 
 
+```{r}
+final_grades |>
+  ggplot(aes(x = factor(group), y = final_grade)) +
+  geom_boxplot(fill = "steelblue", alpha = 0.7)
+```
+
+We see a slight dependency in some groups like 11. 
+
+## Question 25
+
+```{r}
+final_grades |>
+  ggplot(aes(x = factor(group), y = final_grade)) +
+           facet_wrap(vars(sex))+
+           geom_boxplot(fill = "steelblue", alpha = 0.7)
+```
+Female overall have better grades then male. 
+
