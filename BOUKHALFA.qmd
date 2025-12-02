@@ -33,3 +33,21 @@ course_description<-course_description|>
   arrange(course)
 course_description |>knitr::kable()
 ```
+## Students 
+### Question 3
+
+```{r}
+students<-vroom(here("data","students.csv"))
+```
+```{r}
+students<-(col_types = cols(
+                       id = col_double(),
+                       group=col_double(),
+                       birth_date=col_date(),
+                       sex=col_factor()
+                     ))
+```
+
+The birth
+
+## Grades 
