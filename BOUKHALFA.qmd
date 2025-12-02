@@ -39,7 +39,7 @@ course_description|>
 students<-vroom(here("data","students.csv"), col_types = cols(
                        birth_date=col_date()))
 ```
-The birth
+The {r}
 
 ## Grades 
 ### Question 4
@@ -311,3 +311,43 @@ pass_info |> slice_head(n = 10)|>knitr::kable()
 ```
 
 ## Question 27 
+
+```{r}
+fail_but_10<-pass_info |>
+  filter(final_grade >= 10, pass == FALSE) |>
+  summarise(n_students = n())
+
+fail_but_10|> count()
+```
+
+## Question 28 
+```{r}
+pass_rate <- pass_info |>
+  group_by(group) |>
+  summarise(pass_rate = mean(pass) * 100, .groups = "drop")
+
+pass_rate |> knitr::kable()
+
+pass_rate |>
+  ggplot(aes(x = factor(group), y = pass_rate)) +
+  geom_col(fill = "steelblue")
+```
+
+## Question 29 
+```{r}
+course_failure <- grades |>
+  mutate(grade = as.numeric(grade)) |>
+  group_by(id, course_id) |>
+  summarise(avg_course = mean(grade, na.rm = TRUE), .groups = "drop") |>
+  filter(avg_course < 5) |>
+  count(course_id, sort = TRUE) |>
+  left_join(course_description |> select(course_id, course), by = "course_id") |>
+  select(course, n)
+
+course_failure |> slice_max(n, n = 1)
+```
+
+## Question 30 
+
+
+
