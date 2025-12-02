@@ -37,17 +37,9 @@ course_description |>knitr::kable()
 ### Question 3
 
 ```{r}
-students<-vroom(here("data","students.csv"))
+students<-vroom(here("data","students.csv"), col_types = cols(
+                       birth_date=col_date()))
 ```
-```{r}
-students<-(col_types = cols(
-                       id = col_double(),
-                       group=col_double(),
-                       birth_date=col_date(),
-                       sex=col_factor()
-                     ))
-```
-
 The birth
 
 ## Grades 
@@ -57,5 +49,13 @@ The birth
 grades<-read.csv(here("data","grades.csv"))
 grades<-read.csv("data/grades.csv", na.strings = "_")
 grades<-vroom(here("data","grades.csv"),delim=":")
+```
+
+# Student population analysis
+## Question 5 
+
+```{r}
+students|>group_by(group)|>ggplot(aes(x = group)) + 
+  geom_histogram(binwidth=30)+theme_bw()
 ```
 
