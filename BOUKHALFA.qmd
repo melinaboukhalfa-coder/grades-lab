@@ -175,6 +175,19 @@ dist_pyramid|>ggplot(aes(x=factor(nb_grades),y=nb_students))+
 ```{r}
 grades_pyramids |>
   ggplot(aes(x = factor(group), y = nb_grades, fill = factor(group))) +
-  geom_boxplot()
+  geom_violin()
+```
+
+## Question 18
+```{r}
+grades_pyramids2<-grades|>filter(course_id == pyramid_students) |>
+  group_by(id) |>
+  summarise(nb_grades = n()) |>
+  left_join(students, by = "id") |>
+  select(id, group, nb_grades,sex)
+
+ggplot(grades_pyramids2,aes(x=factor(group),y=nb_grades,fill=factor(group)))+
+  geom_boxplot()+
+  facet_wrap(vars(sex))
 ```
 
