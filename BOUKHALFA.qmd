@@ -288,3 +288,26 @@ final_grades |>
 ```
 Female overall have better grades then male. 
 
+## Question 26
+
+```{r}
+pass_info <- grades |>
+  mutate(grade = as.numeric(grade)) |>
+  left_join(course_description |> select(course_id, semester), by = "course_id") |>
+  group_by(id, course_id, semester) |>
+  summarise(avg_course = mean(grade, na.rm = TRUE), .groups = "drop") |>
+  group_by(id) |>
+  summarise(
+    min_course = min(avg_course),
+    min_semester = min(tapply(avg_course, semester, mean)),
+    .groups = "drop"
+  ) |>
+  left_join(final_grades |> select(id, group, final_grade), by = "id") |>
+  mutate(pass = (min_course >= 5) & (min_semester >= 10)) |>
+  select(id, group, final_grade, pass)
+
+pass_info |> slice_head(n = 10)|>knitr::kable()
+
+```
+
+## Question 27 
