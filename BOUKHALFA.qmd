@@ -159,3 +159,22 @@ grades_pyramids<-grades|>filter(course_id == pyramid_students) |>
 grades_pyramids|>slice_sample(n=10)|>knitr::kable()
 ```
 
+## Question 16
+
+```{r}
+dist_pyramid<-grades_pyramids|>group_by(nb_grades)|>
+  summarise(nb_students=n())|>
+  arrange(nb_grades)
+
+dist_pyramid|>knitr::kable()
+dist_pyramid|>ggplot(aes(x=factor(nb_grades),y=nb_students))+
+  geom_col()
+```
+
+## Question 17 
+```{r}
+grades_pyramids |>
+  ggplot(aes(x = factor(group), y = nb_grades, fill = factor(group))) +
+  geom_boxplot()
+```
+
