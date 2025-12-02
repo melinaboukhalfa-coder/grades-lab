@@ -124,3 +124,20 @@ grades |>
     geom_boxplot()
 ```
 
+# Attendance analysis
+## Question 13
+
+```{r}
+grades_per_student<-grades|> group_by(id)|>
+  summarise(nb_grades=n())|>
+  left_join(students, by="id")|>
+  select(id,group,sex,nb_grades)
+```
+
+```{r}
+grades_per_student|>slice_head(n=10)|>knitr::kable()
+```
+
+
+
+
