@@ -78,3 +78,9 @@ ggplot(age_students,aes(x=age))+
   geom_density(bw="sj")+theme_minimal()
 ```
 
+## Question 8 
+```{r}
+age_students|>group_by(group)|>summarise(median=median(age))|>
+  knitr::kable()
+```
+
