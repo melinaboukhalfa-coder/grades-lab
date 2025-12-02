@@ -3,9 +3,9 @@ title: "BOUKHALFA"
 author: "Mélina Boukhalfa"
 format: html
 ---
-
-# Study organisation
-## Question 1 
+#Introduction
+## Study organisation
+###  Question 1 
 
 ```{r}
 library(here)
@@ -13,6 +13,8 @@ library(vroom)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
+library(readr)
+library(knitr)
 ```
 
 ```{r}
@@ -23,3 +25,11 @@ here::i_am("grades-lab.Rproj")
 course_description<-vroom(here("data","courses.csv"))
 ```
 
+### Question 2
+```{r}
+course_description<-course_description|>
+  rename("identifier"=course_id,
+              "number of exams"=nb_grades)|>
+  arrange(course)
+course_description |>knitr::kable()
+```
