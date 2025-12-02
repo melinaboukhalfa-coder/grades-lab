@@ -139,5 +139,10 @@ grades_per_student|>slice_head(n=10)|>knitr::kable()
 ```
 
 
+## Question 14 
 
+```{r}
+ggplot(grades_per_student,aes(x=sex,y=nb_grades,fill=sex))+
+  geom_violin()
+```
 
