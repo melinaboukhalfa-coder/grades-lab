@@ -27,11 +27,10 @@ course_description<-vroom(here("data","courses.csv"))
 
 ### Question 2
 ```{r}
-course_description<-course_description|>
+course_description|>
   rename("identifier"=course_id,
-              "number of exams"=nb_grades)|>
-  arrange(course)
-course_description |>knitr::kable()
+         "number of exams"=nb_grades)|>
+  arrange(course) |>knitr::kable()
 ```
 ## Students 
 ### Question 3
@@ -95,3 +94,6 @@ age_students|> group_by(group)|>
 ```
 # Simple grade analysis
 ## Question 10 
+
+The data set contains `r sum(!is.na(course_description$nb_grades))` grades.
+
