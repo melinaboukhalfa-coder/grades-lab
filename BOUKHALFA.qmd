@@ -55,7 +55,15 @@ grades<-vroom(here("data","grades.csv"),delim=":")
 ## Question 5 
 
 ```{r}
-students|>group_by(group)|>ggplot(aes(x = group)) + 
-  geom_histogram(binwidth=30)+theme_bw()
+ggplot(students,aes(x=factor(group))) +
+         geom_bar(position = "dodge")+
+         theme_bw()
 ```
+## Question 6
+```{r}
+ggplot(students,aes(x=factor(group), fill=sex)) +
+         geom_bar(position="fill")+
+         theme_bw()
+```
+
 
