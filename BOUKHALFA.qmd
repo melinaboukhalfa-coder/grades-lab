@@ -51,3 +51,11 @@ students<-(col_types = cols(
 The birth
 
 ## Grades 
+### Question 4
+
+```{r}
+grades<-read.csv(here("data","grades.csv"))
+grades<-read.csv("data/grades.csv", na.strings = "_")
+grades<-vroom(here("data","grades.csv"),delim=":")
+```
+
