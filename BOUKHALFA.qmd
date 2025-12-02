@@ -252,3 +252,21 @@ grades_summary |>
 ```
 
 There is no clear pattern. 
+
+## Question 23
+
+```{r}
+final_grades <- grades_summary |>
+  left_join(students |> select(id, sex), by = "id")|>
+  mutate(final_grade = rowMeans(grades_wide[ , !(names(grades_wide) %in% c("id","group"))], na.rm = TRUE)) |>
+  ungroup() |>
+  select(id, group, sex, final_grade) |>
+  arrange(desc(final_grade))
+
+final_grades |>
+  slice_head(n=10) |>
+  knitr::kable()
+```
+
+## Question 24 
+
