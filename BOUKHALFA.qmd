@@ -66,4 +66,15 @@ ggplot(students,aes(x=factor(group), fill=sex)) +
          theme_bw()
 ```
 
+## Question 7 
+```{r}
+age_students <- students|>
+  mutate(
+    age = as.numeric(format(Sys.Date(), "%Y")) - as.numeric(format(birth_date, "%Y")))
+```
+
+```{r}
+ggplot(age_students,aes(x=age))+
+  geom_density(bw="sj")+theme_minimal()
+```
 
