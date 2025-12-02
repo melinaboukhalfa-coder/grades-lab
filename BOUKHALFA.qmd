@@ -187,7 +187,29 @@ grades_pyramids2<-grades|>filter(course_id == pyramid_students) |>
   select(id, group, nb_grades,sex)
 
 ggplot(grades_pyramids2,aes(x=factor(group),y=nb_grades,fill=factor(group)))+
-  geom_boxplot()+
+  geom_boxplot(width=0.6)+
   facet_wrap(vars(sex))
 ```
 
+# Grade analysis
+## Question 19 
+
+```{r}
+grades_summary <- grades |>
+  mutate(grade = as.numeric(grade)) |>
+  group_by(id, course_id) |>
+  summarise(avg_grade = mean(grade, na.rm = TRUE), .groups = "drop") |>
+  left_join(students |> select(id, group), by = "id") |>
+  left_join(course_description |> select(course_id, course), by = "course_id") |>
+  select(id, group, course, avg_grade) |>
+  pivot_wider(names_from = course, values_from = avg_grade)
+
+grades_summary |>
+  select(id, group, 
+         `Alchemy and Hermetic Philosophy`, 
+         `Astrology and Celestial Navigation`)|>
+  slice_head(n = 10) |>
+  knitr::kable(digits=2)
+```
+
+## Question 20
