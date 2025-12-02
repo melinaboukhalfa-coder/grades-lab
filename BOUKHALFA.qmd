@@ -97,3 +97,19 @@ age_students|> group_by(group)|>
 
 The data set contains `r sum(!is.na(course_description$nb_grades))` grades.
 
+## Question 11
+
+```{r}
+grades |>
+  filter(course_id == course_description |>
+           filter(course == "Astrology and Celestial Navigation") |> 
+           pull(course_id)) %>%
+  left_join(students, by = "id") |>
+  mutate(grade = as.numeric(grade)) |>
+  group_by(group) |>
+  summarise(avg_grade = mean(grade, na.rm = TRUE)) |>
+  ggplot(aes(x = factor(group), y = avg_grade)) +
+  geom_col(fill = "steelblue") +
+  theme_minimal()
+```
+
