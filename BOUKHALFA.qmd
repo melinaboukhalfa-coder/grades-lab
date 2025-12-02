@@ -146,3 +146,16 @@ ggplot(grades_per_student,aes(x=sex,y=nb_grades,fill=sex))+
   geom_violin()
 ```
 
+## Question 15
+```{r}
+pyramid_students<-course_description|>filter(course=="Pyramid Construction and Engineering")|>pull(course_id)
+
+grades_pyramids<-grades|>filter(course_id == pyramid_students) |>
+  group_by(id) |>
+  summarise(nb_grades = n()) |>
+  left_join(students, by = "id") |>
+  select(id, group, nb_grades)
+
+grades_pyramids|>slice_sample(n=10)|>knitr::kable()
+```
+
