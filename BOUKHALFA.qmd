@@ -213,3 +213,19 @@ grades_summary |>
 ```
 
 ## Question 20
+
+```{r}
+grades_summary|>ggplot(aes(x = `Pharaonic Law and Governance`,
+    y = `Medicine and Herbalism` )) +
+  geom_point(alpha=0.5, color="lightblue")
+```
+There is no clear pattern, they seem a bit dependant from one another but not completely. 
+
+## Question 21
+```{r}
+grades_summary|>group_by(group)|>summarise(correlation=cor(`Pharaonic Law and Governance`,`Alchemy and Hermetic Philosophy`))|>
+  arrange(desc(abs(correlation)))|>
+  slice_head(n=10)|>knitr::kable()
+```
+
+There is a low correlation between the two courses, but they all seem positive. 
